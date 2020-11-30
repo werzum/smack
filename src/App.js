@@ -4,7 +4,21 @@ import { Component } from 'react';
 import RangeSlider from "./Components/custom_slider.js";
 import CustomGridList from './Components/custom_grid_list';
 import MusicPlayer from './Components/music_player';
+import CustomAppBar from './Components/custom_appbar';
+import { withStyles } from "@material-ui/core/styles";
 const {Howl} = require('howler');
+
+const styles = theme => ({
+  musicPlayer: {
+    background: "black"
+  },
+  text:{
+    width:"50%"
+  },
+  app:{
+    height: '90vh'
+  }
+});
 
 
 function getRandomInt(min,max){
@@ -18,37 +32,37 @@ class App extends Component{
   constructor(){
     super();
     this.punch1= new Howl({
-      src:["Sounds/punch_1.wav"]
+      src:["Sounds/left.mp3"]
     });
     this.punch2= new Howl({
-      src:["Sounds/punch_2.wav"]
+      src:["Sounds/right.mp3"]
     });
     this.punch3= new Howl({
-      src:["Sounds/punch_3.mp3"]
+      src:["Sounds/hook.mp3"]
     });
     this.kick1= new Howl({
-      src:["Sounds/kick_1.mp3"]
+      src:["Sounds/heel_kick.mp3"]
     });
     this.kick2= new Howl({
-      src:["Sounds/sandbag_1.mp3"]
+      src:["Sounds/high_kick.mp3"]
     });
     this.kick3= new Howl({
-      src:["Sounds/sandbag_2.mp3"]
+      src:["Sounds/low_kick.mp3"]
     });
     this.evade1= new Howl({
-      src:["Sounds/evade_1.mp3"]
+      src:["Sounds/duck.mp3"]
     });
     this.countdown= new Howl({
       src:["Sounds/beep_countdown.mp3"]
     });
     this.state ={
       punchCounter : 10,
-      soundArray : [{index:0,name:"Punch 1",sound:this.punch1,active:true},
-        {index:1,name:"Punch 2",sound:this.punch2,active:true},
-        {index:2,name:"Punch 3",sound:this.punch3,active:true},
-        {index:3,name:"Kick 1",sound:this.kick1,active:true},
-        {index:4,name:"Kick 2",sound:this.kick2,active:true},
-        {index:5,name:"Kick 3",sound:this.kick3,active:true}],
+      soundArray : [{index:0,name:"Left",sound:this.punch1,active:true},
+        {index:1,name:"Right",sound:this.punch2,active:true},
+        {index:2,name:"Hook",sound:this.punch3,active:true},
+        {index:3,name:"Heel Kick",sound:this.kick1,active:true},
+        {index:4,name:"High Kick",sound:this.kick2,active:true},
+        {index:5,name:"Low Kick",sound:this.kick3,active:true}],
       soundQueue:[],
       playing:false
     }
@@ -109,6 +123,7 @@ class App extends Component{
       slider_1_max : max
     })
   }
+
   arrayHandler(array) {
     this.setState({
       selectedSounds : array
@@ -121,12 +136,24 @@ class App extends Component{
 
   render(){
 
+    const { classes } = this.props;
+
     return (
         <div className="App">
-          <header className="App-header">
-            <Typography>Which moves should be active?</Typography>
-            <CustomGridList handler={this.arrayHandler} soundArray={this.state.soundArray} toggleActive={this.toggleActive}/>
-            <Grid container>
+            <CustomAppBar/>
+            <header className="App-header">
+            
+            <Grid container direction="column" alignContent="center" spacing={6}>
+              <Grid item className={classes.text}>
+                <Typography variant="h6">
+                  An app to help us stay fit without training with a real partner by generating an audio-guided work-out session.
+                  Select the moves you want to practice, the time between them and the overall number of moves. Then, start your workout. 
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography>Which moves should be active?</Typography>
+                <CustomGridList handler={this.arrayHandler} soundArray={this.state.soundArray} toggleActive={this.toggleActive}/>
+              </Grid>
               <Grid item>
                 <Typography>Set the time between punches</Typography>
                 <RangeSlider handler={this.handler}/>
@@ -135,13 +162,15 @@ class App extends Component{
                 <Typography>How many punches do you want to throw?</Typography>
                 <Slider value={this.state.punchCounter} onChange={this.handlePunchCounterChange} defaultValue={this.state.punchCounter} valueLabelDisplay="auto" min={10} max={1000}/>
               </Grid>
-             </Grid>
-            <MusicPlayer start={this.startLoop} stop={this.stopLoop} playing={this.state.playing}/>
-          </header>
+              <Grid item >
+                <MusicPlayer className={classes.musicPlayer} start={this.startLoop} stop={this.stopLoop} playing={this.state.playing}/>
+              </Grid>
+            </Grid>
+            </header>
         </div>
       );
     }
   }
 
 
-export default App;
+export default withStyles(styles)(App);

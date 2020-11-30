@@ -15,6 +15,10 @@ gridList: {
 width: 500,
 height: 450,
 },
+customCard: {
+  margin: 10,
+  width: "20%"
+}
 }));
 
 export default function CustomGridList(props) {
@@ -22,10 +26,10 @@ const classes = useStyles();
 
 return (
 <div>
-  <Grid cols={3} container direction="row">
+  <Grid container direction="row">
     {props.soundArray.map((tile) => (
-      <Grid item>
-        <CustomCard name={tile.name} active={tile.active} 
+      <Grid item className={classes.customCard}>
+        <CustomCard className={classes.customCard} name={tile.name} active={tile.active} 
         index={tile.index} toggleActive={props.toggleActive}
         sound={tile.sound}/>
       </Grid>

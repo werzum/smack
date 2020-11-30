@@ -9,14 +9,6 @@ import Switch from '@material-ui/core/Switch';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 
 const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
   title: {
     fontSize: 14,
   },
@@ -29,7 +21,7 @@ export default function CustomCard(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
         {props.name}
