@@ -1,11 +1,13 @@
 import './App.css';
-import {Button, Grid, Slider, Typography} from "@material-ui/core"
+import {Grid, Slider, Typography} from "@material-ui/core"
 import { Component } from 'react';
 import RangeSlider from "./Components/custom_slider.js";
 import CustomGridList from './Components/custom_grid_list';
 import MusicPlayer from './Components/music_player';
 import CustomAppBar from './Components/custom_appbar';
+import TextCard from './Components/custom_textcard';
 import { withStyles } from "@material-ui/core/styles";
+
 const {Howl} = require('howler');
 
 const styles = theme => ({
@@ -13,10 +15,13 @@ const styles = theme => ({
     background: "black"
   },
   text:{
-    width:"50%"
+    maxWidth:"600px"
   },
   app:{
     height: '90vh'
+  },
+  item:{
+    margin: "20px"
   }
 });
 
@@ -143,22 +148,19 @@ class App extends Component{
             <CustomAppBar/>
             <header className="App-header">
             
-            <Grid container direction="column" alignContent="center" spacing={6}>
-              <Grid item className={classes.text}>
-                <Typography variant="h6">
-                  An app to help us stay fit without training with a real partner by generating an audio-guided work-out session.
-                  Select the moves you want to practice, the time between them and the overall number of moves. Then, start your workout. 
-                </Typography>
+            <Grid container direction="column" alignContent="center" spacing={0}>
+              <Grid item xs={12} className={classes.text}>
+                <TextCard></TextCard>
               </Grid>
               <Grid item>
                 <Typography>Which moves should be active?</Typography>
                 <CustomGridList handler={this.arrayHandler} soundArray={this.state.soundArray} toggleActive={this.toggleActive}/>
               </Grid>
-              <Grid item>
+              <Grid item className={classes.item}>
                 <Typography>Set the time between punches</Typography>
                 <RangeSlider handler={this.handler}/>
               </Grid>
-              <Grid item>
+              <Grid item className={classes.item}>
                 <Typography>How many punches do you want to throw?</Typography>
                 <Slider value={this.state.punchCounter} onChange={this.handlePunchCounterChange} defaultValue={this.state.punchCounter} valueLabelDisplay="auto" min={10} max={1000}/>
               </Grid>

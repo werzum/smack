@@ -17,7 +17,7 @@ height: 450,
 },
 customCard: {
   margin: 10,
-  width: "20%"
+  width: "25%"
 }
 }));
 

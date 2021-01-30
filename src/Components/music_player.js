@@ -23,17 +23,17 @@ const classes = useStyles();
 
 return (
 <div className={classes.root}>
-<ButtonGroup size="large" className={classes.buttonGroup}>
-  <IconButton aria-label="reset" size="small">
-    <RotateLeftIcon />
-  </IconButton>
-  <IconButton aria-label="play" size="medium" key={props.playing.tostring} onClick={()=>props.start()}>
-      {props.playing? <PauseCircleFilledIcon/> : <PlayCircleFilledIcon />}
-  </IconButton>
-  <IconButton aria-label="reset" size="small" onClick={()=>props.stop()}>
-    <StopIcon />
-  </IconButton>
-</ButtonGroup>
+  <ButtonGroup size="large" className={classes.buttonGroup}>
+    <IconButton aria-label="reset" size="small">
+      <RotateLeftIcon />
+    </IconButton>
+    <IconButton aria-label="play" size="medium" key={props.playing.tostring} onClick={()=>props.start()}>
+        {props.playing? <PauseCircleFilledIcon/> : <PlayCircleFilledIcon />}
+    </IconButton>
+    <IconButton aria-label="reset" size="small" onClick={()=>props.stop()}>
+      <StopIcon />
+    </IconButton>
+  </ButtonGroup>
 </div>
 );
 }
