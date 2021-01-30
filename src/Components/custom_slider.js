@@ -1,6 +1,6 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Slider from '@material-ui/core/Slider';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Slider from "@material-ui/core/Slider";
 
 const useStyles = makeStyles({
   root: {
@@ -14,7 +14,7 @@ export default function RangeSlider(props) {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    props.handler(value[0],value[1])
+    props.handler(value[0], value[1]);
   };
 
   return (
